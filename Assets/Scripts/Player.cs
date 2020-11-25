@@ -8,9 +8,6 @@ public class Player : MonoBehaviour
     private Rigidbody playerBody;
 
     [SerializeField]
-    private Collider distanceToTheGround;
-
-    [SerializeField]
     private float jumpforce = 150f;
 
     private bool isGrounded = true;
@@ -22,7 +19,6 @@ public class Player : MonoBehaviour
     {
         // Get the Rigidbody component of Player
         playerBody = GetComponent<Rigidbody>();
-        distanceToTheGround = GetComponent<Collider>();
     }
 
     // Update is called once per frame
@@ -66,11 +62,6 @@ public class Player : MonoBehaviour
     private void Jump()
     {
         playerBody.AddForce(jumpforce * Vector3.up);
-    }
-
-    private void OnCollisionStay(Collision col) {
-        foreach(ContactPoint p in col.contacts) {
-        }
     }
             // Vector3 bottom = capcoll
 }
