@@ -75,3 +75,6 @@ crashlytics-build.properties
 
 # VS Code settings
 .vscode/
+
+# Rider settings
+.idea/
