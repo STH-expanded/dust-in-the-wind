@@ -10,6 +10,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Collider distanceToTheGround;
 
+    [SerializeField]
+    private float jumpforce = 150f;
+
+    private bool isGrounded = true;
+
     private Vector3 inputVector;
 
     // Start is called before the first frame update
@@ -31,7 +36,7 @@ public class Player : MonoBehaviour
         // Face the cube to the looking direction
         transform.LookAt(transform.position + new Vector3(inputVector.x, 0, inputVector.z));
         
-        if (Input.GetButtonDown("Jump")) {
+        if (Input.GetButtonDown("Jump") && isGrounded) {
             Jump();
         };
     }
@@ -42,11 +47,25 @@ public class Player : MonoBehaviour
         playerBody.velocity = inputVector;
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "mesh_map_placeholder")
+        {
+            isGrounded = true;
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.name == "mesh_map_placeholder")
+        {
+            isGrounded = false;
+        }
+    }
+
     private void Jump()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, distanceToTheGround.bounds.extents.y + 0.1f)) {
-            inputVector = new Vector3(Input.GetAxis("Horizontal")*2, 2, Input.GetAxis("Vertical")*2);
-        }
+        playerBody.AddForce(jumpforce * Vector3.up);
     }
 
     private void OnCollisionStay(Collision col) {
