@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,11 +10,17 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private Collider distanceToTheGround;
-
+    
     [SerializeField]
     private float jumpforce = 150f;
 
     private bool isGrounded = true;
+    
+    [SerializeField]
+    private float pushRadius;
+    
+    [SerializeField]
+    private float pushAmount;
 
     private Vector3 inputVector;
 
@@ -39,14 +46,13 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded) {
             Jump();
         };
-    }
 
-    // Refresh at 60 fps
-    void FixedUpdate() {
-        // Assign inputs to Player
-        playerBody.velocity = inputVector;
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            DoPush();
+        }
     }
-
+    
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name == "mesh_map_placeholder")
@@ -63,6 +69,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    // Refresh at 60 fps
+    void FixedUpdate() {
+        // Assign inputs to Player
+        playerBody.velocity = inputVector;
+    }
+
     private void Jump()
     {
         playerBody.AddForce(jumpforce * Vector3.up);
@@ -73,4 +85,19 @@ public class Player : MonoBehaviour
         }
     }
             // Vector3 bottom = capcoll
+
+
+    private void DoPush()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, pushRadius);
+
+        foreach (Collider collider in colliders)
+        {
+            if (collider.CompareTag("Cube-To-Push"))
+            {
+                Rigidbody pushedBody = collider.GetComponent<Rigidbody>();
+                pushedBody.AddExplosionForce(pushAmount, Vector3.up, pushRadius);
+            }
+        }
+    }
 }
