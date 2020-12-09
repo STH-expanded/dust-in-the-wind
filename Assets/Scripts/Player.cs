@@ -12,12 +12,15 @@ public class Player : MonoBehaviour
     private float jumpforce = 150f;
 
     private bool isGrounded = true;
+
+    [SerializeField]
+    private int playerSpeed = 2;
     
     [SerializeField]
-    private float pushRadius;
+    private float pushRadius = 90000f;
     
     [SerializeField]
-    private float pushAmount;
+    private float pushAmount = 2000;
 
     private Vector3 inputVector;
 
@@ -34,14 +37,14 @@ public class Player : MonoBehaviour
     void Update()
     {
         // Get Inputs
-        inputVector = new Vector3(Input.GetAxis("Horizontal")*2, playerBody.velocity.y, Input.GetAxis("Vertical")*2);
+        inputVector = new Vector3(Input.GetAxis("Horizontal") * playerSpeed, playerBody.velocity.y, Input.GetAxis("Vertical") * playerSpeed);
 
         // Face the cube to the looking direction
         transform.LookAt(transform.position + new Vector3(inputVector.x, 0, inputVector.z));
         
-        if (Input.GetButtonDown("Jump") && isGrounded) {
-            Jump();
-        };
+        // if (Input.GetButtonDown("Jump") && isGrounded) {
+        //     Jump();
+        // };
 
         if (Input.GetKeyDown(KeyCode.P))
         {
