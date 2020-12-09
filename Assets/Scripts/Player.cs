@@ -14,10 +14,10 @@ public class Player : MonoBehaviour
     private bool isGrounded = true;
     
     [SerializeField]
-    private float pushRadius;
+    private float pushRadius = 9100;
     
     [SerializeField]
-    private float pushAmount;
+    private float pushAmount = 2000;
 
     private Vector3 inputVector;
 
@@ -34,35 +34,27 @@ public class Player : MonoBehaviour
     void Update()
     {
         // Get Inputs
-        inputVector = new Vector3(Input.GetAxis("Horizontal")*2, playerBody.velocity.y, Input.GetAxis("Vertical")*2);
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+
+        inputVector = new Vector3(horizontalInput * 2, playerBody.velocity.y, verticalInput * 2);
 
         // Face the cube to the looking direction
         transform.LookAt(transform.position + new Vector3(inputVector.x, 0, inputVector.z));
         
-        if (Input.GetButtonDown("Jump") && isGrounded) {
-            Jump();
-        };
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded) Jump();
 
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            DoPush();
-        }
+        if (Input.GetKeyDown(KeyCode.P)) DoPush();
     }
     
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "mesh_map_placeholder")
-        {
-            isGrounded = true;
-        }
+        if (collision.gameObject.name == "mesh_map_placeholder") isGrounded = true;
     }
 
     void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.name == "mesh_map_placeholder")
-        {
-            isGrounded = false;
-        }
+        if (collision.gameObject.name == "mesh_map_placeholder") isGrounded = false;
     }
 
     // Refresh at 60 fps
