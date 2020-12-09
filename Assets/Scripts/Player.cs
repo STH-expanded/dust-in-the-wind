@@ -45,11 +45,6 @@ public class Player : MonoBehaviour
         // if (Input.GetButtonDown("Jump") && isGrounded) {
         //     Jump();
         // };
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            DoPush();
-        }
     }
     
     void OnCollisionEnter(Collision collision)
@@ -57,6 +52,13 @@ public class Player : MonoBehaviour
         if (collision.gameObject.name == "mesh_map_placeholder")
         {
             isGrounded = true;
+        }
+    }
+
+    void OnTriggerStay(Collider collider) {
+        if (collider.CompareTag("Cube-To-Push") && Input.GetKeyDown(KeyCode.P))
+        {
+            DoPush(collider);
         }
     }
 
@@ -81,17 +83,9 @@ public class Player : MonoBehaviour
             // Vector3 bottom = capcoll
 
 
-    private void DoPush()
+    private void DoPush(Collider collider)
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, pushRadius);
-
-        foreach (Collider collider in colliders)
-        {
-            if (collider.CompareTag("Cube-To-Push"))
-            {
-                Rigidbody pushedBody = collider.GetComponent<Rigidbody>();
-                pushedBody.AddExplosionForce(pushAmount, Vector3.up, pushRadius);
-            }
-        }
+        Rigidbody pushedBody = collider.GetComponent<Rigidbody>();
+        pushedBody.AddExplosionForce(pushAmount, Vector3.up, pushRadius);
     }
 }
