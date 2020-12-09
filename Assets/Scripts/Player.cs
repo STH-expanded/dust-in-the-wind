@@ -12,14 +12,20 @@ public class Player : MonoBehaviour
     private float jumpforce = 150f;
 
     private bool isGrounded = true;
+
+    [SerializeField]
+    private int playerSpeed = 2;
     
     [SerializeField]
-    private float pushRadius = 9100;
+    private float pushRadius = 90000f;
     
     [SerializeField]
     private float pushAmount = 2000;
 
     private Vector3 inputVector;
+
+    private const String pushAction = "pushAction";
+    private const String pullAction = "pullAction";
 
     // Start is called before the first frame update
     void Start()
@@ -37,12 +43,14 @@ public class Player : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        inputVector = new Vector3(horizontalInput * 2, playerBody.velocity.y, verticalInput * 2);
+        inputVector = new Vector3(horizontalInput * playerSpeed, playerBody.velocity.y, verticalInput * playerSpeed);
 
         // Face the cube to the looking direction
         transform.LookAt(transform.position + new Vector3(inputVector.x, 0, inputVector.z));
-        
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded) Jump();
+
+        // if (Input.GetButtonDown("Jump") && isGrounded) {
+        //     Jump();
+        // };
 
         if (Input.GetKeyDown(KeyCode.P)) DoPush();
     }
@@ -67,8 +75,17 @@ public class Player : MonoBehaviour
     {
         playerBody.AddForce(jumpforce * Vector3.up);
     }
-            // Vector3 bottom = capcoll
 
+    private void LoadAction(String action)
+    {
+        switch (action)
+        {
+            case pushAction:
+                break;
+            case pullAction:
+                break;
+        }
+    }
 
     private void DoPush()
     {
