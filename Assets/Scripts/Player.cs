@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -21,6 +18,13 @@ public class Player : MonoBehaviour
     
     [SerializeField]
     private float pushAmount = 2000;
+
+    [SerializeField] 
+    private float attractAmount = 2000;
+    
+    [SerializeField] 
+    private float attractSpeed = 2;
+
 
     private Vector3 inputVector;
 
@@ -56,9 +60,15 @@ public class Player : MonoBehaviour
     }
 
     void OnTriggerStay(Collider collider) {
-        if (collider.CompareTag("Cube-To-Push") && Input.GetKeyDown(KeyCode.P))
+        if (collider.CompareTag("Cube-To-Push"))
         {
-            DoPush(collider);
+            if (Input.GetKeyDown(KeyCode.P)) {
+                DoPush(collider);
+            }
+
+            if (Input.GetKeyDown(KeyCode.O)) {
+                DoAttract(collider);
+            }
         }
     }
 
@@ -87,5 +97,10 @@ public class Player : MonoBehaviour
     {
         Rigidbody pushedBody = collider.GetComponent<Rigidbody>();
         pushedBody.AddExplosionForce(pushAmount, Vector3.up, pushRadius);
+    }
+
+    private void DoAttract(Collider collider)
+    {
+        collider.transform.position = Vector3.MoveTowards(collider.transform.position, playerBody.position, attractSpeed * Time.deltaTime);
     }
 }
