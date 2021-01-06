@@ -59,19 +59,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    void OnTriggerStay(Collider collider) {
-        if (collider.CompareTag("Cube-To-Push"))
-        {
-            if (Input.GetKeyDown(KeyCode.P)) {
-                DoPush(collider);
-            }
-
-            if (Input.GetKeyDown(KeyCode.O)) {
-                DoAttract(collider);
-            }
-        }
-    }
-
     void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.name == "mesh_map_placeholder")
