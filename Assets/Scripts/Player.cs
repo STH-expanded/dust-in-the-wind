@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class Player : MonoBehaviour
     private bool isGrounded = true;
 
     [SerializeField]
-    private int playerSpeed = 2;
+    private int playerSpeed = 3;
     
     [SerializeField]
     private float pushRadius = 90000f;
@@ -29,7 +30,9 @@ public class Player : MonoBehaviour
     private Vector3 inputVector;
 
     private const String pushAction = "pushAction";
+    private float pushActionCost = 0.2f; // Can't go over 1
     private const String pullAction = "pullAction";
+    private float pullActionCost = 0.2f; // Can't go over 1
 
     // Start is called before the first frame update
     void Start()
@@ -58,7 +61,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.P))
         {
-            DoPush();
+            LoadAction(pushAction);
         }
 
         if (Input.GetKey(KeyCode.O))
@@ -93,8 +96,18 @@ public class Player : MonoBehaviour
         switch (action)
         {
             case pushAction:
+                if (LoadingSystem.loadAmount >= pushActionCost)
+                {
+                    LoadingSystem.loadAmount -= pushActionCost * LoadingSystem.maximumLoadAmount;
+                    DoPush();
+                }
                 break;
             case pullAction:
+                if (LoadingSystem.loadAmount >= pushActionCost)
+                {
+                    LoadingSystem.loadAmount -= pullActionCost * LoadingSystem.maximumLoadAmount;
+                    // DoPull();
+                }
                 break;
         }
     }
@@ -111,6 +124,7 @@ public class Player : MonoBehaviour
                 pushedBody.AddExplosionForce(pushAmount, Vector3.up, pushRadius);
             }
         }
+
     }
 
     private void DoAttract()
