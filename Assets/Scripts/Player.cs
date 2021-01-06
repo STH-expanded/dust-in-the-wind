@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -21,6 +18,13 @@ public class Player : MonoBehaviour
     
     [SerializeField]
     private float pushAmount = 2000;
+
+    [SerializeField] 
+    private float attractAmount = 2000;
+    
+    [SerializeField] 
+    private float attractSpeed = 2;
+
 
     private Vector3 inputVector;
 
@@ -54,8 +58,15 @@ public class Player : MonoBehaviour
         //     Jump();
         // };
 
-        if (Input.GetKeyDown(KeyCode.P)) LoadAction(pushAction);
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            LoadAction(pushAction)
+        }
 
+        if (Input.GetKey(KeyCode.O))
+        {
+            DoAttract();
+        }
     }
     
     void OnCollisionEnter(Collision collision)
@@ -113,5 +124,19 @@ public class Player : MonoBehaviour
             }
         }
 
+    }
+
+    private void DoAttract()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, pushRadius);
+
+        foreach (Collider collider in colliders)
+        {
+            if (collider.CompareTag("Cube-To-Push"))
+            {
+                collider.transform.position = Vector3.MoveTowards(collider.transform.position, playerBody.position,
+                    attractSpeed * Time.deltaTime);
+            }
+        }
     }
 }
