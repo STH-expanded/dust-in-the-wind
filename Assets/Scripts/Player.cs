@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class Player : MonoBehaviour
     private bool isGrounded = true;
 
     [SerializeField]
-    private int playerSpeed = 2;
+    private int playerSpeed = 3;
     
     [SerializeField]
     private float pushRadius = 90000f;
@@ -28,6 +29,11 @@ public class Player : MonoBehaviour
 
     private Vector3 inputVector;
 
+    private const String pushAction = "pushAction";
+    private float pushActionCost = 0.2f; // Can't go over 1
+    private const String pullAction = "pullAction";
+    private float pullActionCost = 0.2f; // Can't go over 1
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,18 +47,21 @@ public class Player : MonoBehaviour
     void Update()
     {
         // Get Inputs
-        inputVector = new Vector3(Input.GetAxis("Horizontal") * playerSpeed, playerBody.velocity.y, Input.GetAxis("Vertical") * playerSpeed);
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+
+        inputVector = new Vector3(horizontalInput * playerSpeed, playerBody.velocity.y, verticalInput * playerSpeed);
 
         // Face the cube to the looking direction
         transform.LookAt(transform.position + new Vector3(inputVector.x, 0, inputVector.z));
-        
+
         // if (Input.GetButtonDown("Jump") && isGrounded) {
         //     Jump();
         // };
 
         if (Input.GetKeyDown(KeyCode.P))
         {
-            DoPush();
+            LoadAction(pushAction);
         }
 
         if (Input.GetKey(KeyCode.O))
@@ -63,18 +72,12 @@ public class Player : MonoBehaviour
     
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "mesh_map_placeholder")
-        {
-            isGrounded = true;
-        }
+        if (collision.gameObject.name == "mesh_map_placeholder") isGrounded = true;
     }
 
     void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.name == "mesh_map_placeholder")
-        {
-            isGrounded = false;
-        }
+        if (collision.gameObject.name == "mesh_map_placeholder") isGrounded = false;
     }
 
     // Refresh at 60 fps
@@ -87,8 +90,27 @@ public class Player : MonoBehaviour
     {
         playerBody.AddForce(jumpforce * Vector3.up);
     }
-            // Vector3 bottom = capcoll
 
+    private void LoadAction(String action)
+    {
+        switch (action)
+        {
+            case pushAction:
+                if (LoadingSystem.loadAmount >= pushActionCost)
+                {
+                    LoadingSystem.loadAmount -= pushActionCost * LoadingSystem.maximumLoadAmount;
+                    DoPush();
+                }
+                break;
+            case pullAction:
+                if (LoadingSystem.loadAmount >= pushActionCost)
+                {
+                    LoadingSystem.loadAmount -= pullActionCost * LoadingSystem.maximumLoadAmount;
+                    // DoPull();
+                }
+                break;
+        }
+    }
 
     private void DoPush()
     {
@@ -102,6 +124,7 @@ public class Player : MonoBehaviour
                 pushedBody.AddExplosionForce(pushAmount, Vector3.up, pushRadius);
             }
         }
+
     }
 
     private void DoAttract()
