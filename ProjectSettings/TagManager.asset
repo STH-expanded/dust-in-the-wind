@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Text
+  - Cube-To-Push
+  - Item-To-Collect
+  - blowAction
   layers:
   - Default
   - TransparentFX
@@ -14,7 +17,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Action Collision
   - 
   - 
   - 
