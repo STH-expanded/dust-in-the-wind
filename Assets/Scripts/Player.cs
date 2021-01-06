@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.P))
         {
-            LoadAction(pushAction)
+            LoadAction(pushAction);
         }
 
         if (Input.GetKey(KeyCode.O))
