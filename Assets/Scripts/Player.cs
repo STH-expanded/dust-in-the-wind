@@ -10,12 +10,15 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private int playerSpeed = 3;
-
-
+    
     private Vector3 inputVector;
 
-    
+    [SerializeField]
+    private String horizontalAxis;
 
+    [SerializeField]
+    private String verticalAxis;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -23,12 +26,11 @@ public class Player : MonoBehaviour
         playerBody = GetComponent<Rigidbody>();
     }
 
-
     //Refresh at each frame
     void Update()
     {
         // Get Inputs
-        inputVector = new Vector3(Input.GetAxis("Horizontal") * playerSpeed, playerBody.velocity.y, Input.GetAxis("Vertical") * playerSpeed);
+        inputVector = new Vector3(Input.GetAxis(horizontalAxis) * playerSpeed, playerBody.velocity.y, Input.GetAxis(verticalAxis) * playerSpeed);
 
         // Face the cube to the looking direction
         transform.LookAt(transform.position + new Vector3(inputVector.x, 0, inputVector.z));
