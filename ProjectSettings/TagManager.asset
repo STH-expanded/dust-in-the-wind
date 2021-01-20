@@ -8,6 +8,8 @@ TagManager:
   - Cube-To-Push
   - Item-To-Collect
   - blowAction
+  - Player1
+  - Player2
   layers:
   - Default
   - TransparentFX
