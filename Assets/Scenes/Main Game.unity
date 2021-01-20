@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.2850269, g: 0.3713935, b: 0.49601045, a: 1}
+  m_IndirectSpecularColor: {r: 0.28502667, g: 0.37139323, b: 0.49600998, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1637,6 +1637,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a95d0386816994645b3fa8e4b96a08af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pushActionCost: 0.001
+  pullActionCost: 0.001
   player: {fileID: 2115214216}
 --- !u!65 &1870172160
 BoxCollider:
@@ -1791,9 +1793,10 @@ GameObject:
   - component: {fileID: 2115214217}
   - component: {fileID: 2115214216}
   - component: {fileID: 2115214218}
+  - component: {fileID: 2115214219}
   m_Layer: 0
   m_Name: Player1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1919,6 +1922,18 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2115214219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115214211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ff211925fec468d9b0f0139288c16a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2138677391
 GameObject:
   m_ObjectHideFlags: 0
@@ -2026,11 +2041,11 @@ PrefabInstance:
     - target: {fileID: 5037840217266475007, guid: b66b65544090cc77c8670f9a543fc2d2, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 5769116904156556382, guid: 8fe801926940b453fae5018575960e0d, type: 3}
+      objectReference: {fileID: 5769116904156556382, guid: e37a9e394c55642298704a0b5cbc0cbf, type: 3}
     - target: {fileID: 7065857224354609973, guid: b66b65544090cc77c8670f9a543fc2d2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 5561349426305759274, guid: 8fe801926940b453fae5018575960e0d, type: 3}
+      objectReference: {fileID: 5561349426305759274, guid: e37a9e394c55642298704a0b5cbc0cbf, type: 3}
     - target: {fileID: 8234228738529116250, guid: b66b65544090cc77c8670f9a543fc2d2, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2090,7 +2105,7 @@ PrefabInstance:
     - target: {fileID: 8489111662630336679, guid: b66b65544090cc77c8670f9a543fc2d2, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 5769116904156556382, guid: 8fe801926940b453fae5018575960e0d, type: 3}
+      objectReference: {fileID: 5769116904156556382, guid: e37a9e394c55642298704a0b5cbc0cbf, type: 3}
     - target: {fileID: 8489111662630336679, guid: b66b65544090cc77c8670f9a543fc2d2, type: 3}
       propertyPath: m_Convex
       value: 0
