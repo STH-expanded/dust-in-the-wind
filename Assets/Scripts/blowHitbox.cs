@@ -16,6 +16,11 @@ public class blowHitbox : MonoBehaviour
     [SerializeField] private float pullActionCost = 0.001f; // Can't go over 1
 
     [SerializeField]
+    private KeyCode blowKey;
+    [SerializeField]
+    private KeyCode attractKey;
+
+    [SerializeField]
     private Rigidbody player;
 
     private List <Collider> collisionsList = new List<Collider>();
@@ -28,7 +33,7 @@ public class blowHitbox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.P) || Input.GetKey(KeyCode.O)) {
+        if (Input.GetKey(blowKey) || Input.GetKey(attractKey)) {
             isActive = true;
             blowCount++;
         
@@ -40,9 +45,9 @@ public class blowHitbox : MonoBehaviour
                 blowPower -= 0.125f;
             }
 
-            if (Input.GetKey(KeyCode.P)) {
+            if (Input.GetKey(blowKey)) {
                 blowDirection = true;  
-            } else if (Input.GetKey(KeyCode.O)) {
+            } else if (Input.GetKey(attractKey)) {
                 blowDirection = false;
             }
             
