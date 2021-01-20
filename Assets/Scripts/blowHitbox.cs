@@ -12,8 +12,8 @@ public class blowHitbox : MonoBehaviour
     private float blowPower = 0;
     private float blowPowerMax = 20;
     private float blowCount = 0;
-    private float pushActionCost = 0.005f; // Can't go over 1
-    private float pullActionCost = 0.005f; // Can't go over 1
+    [SerializeField] private float pushActionCost = 0.001f; // Can't go over 1
+    [SerializeField] private float pullActionCost = 0.001f; // Can't go over 1
 
     [SerializeField]
     private Rigidbody player;
@@ -85,7 +85,7 @@ public class blowHitbox : MonoBehaviour
         if (blowDirection && LoadingSystem.loadAmount >= pushActionCost) {
             LoadingSystem.loadAmount -= pushActionCost * LoadingSystem.maximumLoadAmount;
             blowAction(collider);
-        } else if (!blowDirection && LoadingSystem.loadAmount >= pushActionCost) {
+        } else if (!blowDirection && LoadingSystem.loadAmount >= pullActionCost) {
             LoadingSystem.loadAmount -= pullActionCost * LoadingSystem.maximumLoadAmount;
             blowAction(collider);
         }   
