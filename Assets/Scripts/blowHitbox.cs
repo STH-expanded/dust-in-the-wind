@@ -12,6 +12,8 @@ public class blowHitbox : MonoBehaviour
     private float blowPower = 0;
     private float blowPowerMax = 40;
     private float blowCount = 0;
+
+    [SerializeField] private int blowMultiplier = 1;
     [SerializeField] private float pushActionCost = 0.001f; // Can't go over 1
     [SerializeField] private float pullActionCost = 0.001f; // Can't go over 1
 
@@ -37,12 +39,12 @@ public class blowHitbox : MonoBehaviour
         
             if (blowCount <= blowPowerMax * 4)
             {
-                blowPower += 0.25f;
+                blowPower += (0.25f * blowMultiplier);
             }
 
             if (blowCount > 300 && blowPower > 0)
             {
-                blowPower -= 0.125f;
+                blowPower -= (0.125f * blowMultiplier);
             }
 
             if (Input.GetKey(blowKey))
@@ -62,7 +64,7 @@ public class blowHitbox : MonoBehaviour
 
             if (blowPower > 0)
             {
-                blowPower-= 0.25f;
+                blowPower-= (0.25f * blowMultiplier);
             }
         }
     }
