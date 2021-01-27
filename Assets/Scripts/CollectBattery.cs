@@ -15,7 +15,7 @@ public class CollectBattery : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<Player>() && gameObject.GetComponent<Renderer>().enabled) {
-            player = other.gameObject.transform.parent.gameObject;
+            player = other.gameObject;
             if (
                 (LoadingSystem.loadAmountPlayer1 + batteryPower <= LoadingSystem.maximumLoadAmount || LoadingSystem.loadAmountPlayer1 < LoadingSystem.maximumLoadAmount) ||
                 (LoadingSystem.loadAmountPlayer2 + batteryPower <= LoadingSystem.maximumLoadAmount || LoadingSystem.loadAmountPlayer2 < LoadingSystem.maximumLoadAmount)
