@@ -20,7 +20,7 @@ public class FallDetect : MonoBehaviour
         if (player1.transform.position.y <= -5 || player2.transform.position.y <= -5)
         {
             Debug.Log("Game ended");
-            SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+            SceneManager.LoadScene("EndGame", LoadSceneMode.Single);
             LoadingSystem.loadAmount = 0;
         }
     }
