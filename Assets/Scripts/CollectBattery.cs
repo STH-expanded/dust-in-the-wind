@@ -14,18 +14,18 @@ public class CollectBattery : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Item collected");
-
-        player = other.gameObject.transform.parent.gameObject;
-        if (
-            (LoadingSystem.loadAmountPlayer1 + batteryPower <= LoadingSystem.maximumLoadAmount || LoadingSystem.loadAmountPlayer1 < LoadingSystem.maximumLoadAmount) ||
-            (LoadingSystem.loadAmountPlayer2 + batteryPower <= LoadingSystem.maximumLoadAmount || LoadingSystem.loadAmountPlayer2 < LoadingSystem.maximumLoadAmount)
-        )
-        {
-            collectSound.Play();
-            LoadAmount(INCREASE, player, batteryPower);
-            Destroy(gameObject);
-        }
+        if (other.GetComponent<Player>() && gameObject.GetComponent<Renderer>().enabled) {
+            player = other.gameObject.transform.parent.gameObject;
+            if (
+                (LoadingSystem.loadAmountPlayer1 + batteryPower <= LoadingSystem.maximumLoadAmount || LoadingSystem.loadAmountPlayer1 < LoadingSystem.maximumLoadAmount) ||
+                (LoadingSystem.loadAmountPlayer2 + batteryPower <= LoadingSystem.maximumLoadAmount || LoadingSystem.loadAmountPlayer2 < LoadingSystem.maximumLoadAmount)
+            )
+            {
+                collectSound.Play();
+                LoadAmount(INCREASE, player, batteryPower);
+                StartCoroutine(spawnCooldown(3));
+            }
+        }  
     }
 
     private void LoadAmount(string method, GameObject player, float increment)
@@ -65,5 +65,14 @@ public class CollectBattery : MonoBehaviour
                 LoadingSystem.loadAmountPlayer2 -= increment;
                 break;
         }
+    }
+
+    IEnumerator spawnCooldown(int waitTime )
+    {
+        Debug.Log("Enter coroutine");
+        gameObject.GetComponent<Renderer>().enabled = false;
+        yield return new WaitForSeconds(waitTime);
+        Debug.Log("set to true");    
+        gameObject.GetComponent<Renderer>().enabled = true;
     }
 }
