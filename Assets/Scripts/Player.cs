@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -18,6 +19,8 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private String verticalAxis;
+
+    private bool hasGameStarted = false;
     
     // Start is called before the first frame update
     void Start()
@@ -29,11 +32,18 @@ public class Player : MonoBehaviour
     //Refresh at each frame
     void Update()
     {
-        // Get Inputs
-        inputVector = new Vector3(Input.GetAxis(horizontalAxis) * playerSpeed, playerBody.velocity.y, Input.GetAxis(verticalAxis) * playerSpeed);
+        
+        StartCoroutine(SecondsBeforeStartingGame(3));
 
-        // Face the cube to the looking direction
-        transform.LookAt(transform.position + new Vector3(inputVector.x, 0, inputVector.z));
+        if (hasGameStarted)
+        {
+            // Get Inputs
+            inputVector = new Vector3(Input.GetAxis(horizontalAxis) * playerSpeed, playerBody.velocity.y, Input.GetAxis(verticalAxis) * playerSpeed);
+
+            // Face the cube to the looking direction
+            transform.LookAt(transform.position + new Vector3(inputVector.x, 0, inputVector.z));
+                        
+        }
     }
     
     void OnCollisionEnter(Collision collision)
@@ -50,5 +60,11 @@ public class Player : MonoBehaviour
     void FixedUpdate() {
         // Assign inputs to Player
         playerBody.velocity = inputVector;
+    }
+    
+    IEnumerator SecondsBeforeStartingGame(int waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        hasGameStarted = true;
     }
 }
