@@ -21,7 +21,8 @@ public class FallDetect : MonoBehaviour
         {
             Debug.Log("Game ended");
             SceneManager.LoadScene("EndGame", LoadSceneMode.Single);
-            LoadingSystem.loadAmount = 0;
+            LoadingSystem.loadAmountPlayer1 = 0;
+            LoadingSystem.loadAmountPlayer2 = 0;
         }
     }
 }

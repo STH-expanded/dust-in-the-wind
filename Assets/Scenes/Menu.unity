@@ -457,10 +457,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1005551920}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c42c9702f40f9843b6438444cdca1c3, type: 3}
+  m_Script: {fileID: 11500000, guid: 4009d28b16e7b47d38737fa011a925d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: MainGame
 --- !u!65 &1005551922
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -483,9 +482,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1005551920}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea6cb3918edf2d4408e7b455a5f56515, type: 3}
+  m_Script: {fileID: 11500000, guid: bc90882c1fa8047bdb7743d401a8c8f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneToLoad: MainGame
 --- !u!102 &1005551924
 TextMesh:
   serializedVersion: 3

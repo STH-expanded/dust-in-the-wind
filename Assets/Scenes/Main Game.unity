@@ -2030,8 +2030,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a95d0386816994645b3fa8e4b96a08af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushActionCost: 0.05
-  pullActionCost: 0.05
+  pushActionCost: 0.005
+  pullActionCost: 0.005
   blowKey: 112
   attractKey: 111
   player: {fileID: 2115214216}
