@@ -10,6 +10,7 @@ TagManager:
   - blowAction
   - Player1
   - Player2
+  - pushable
   layers:
   - Default
   - TransparentFX

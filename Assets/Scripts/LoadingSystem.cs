@@ -16,7 +16,7 @@ public class LoadingSystem : MonoBehaviour
         loadingSlider.value = loadAmount / maximumLoadAmount;
         if (loadingSlider.value == 1)
         {
-            Debug.Log("Max power");
+            // Debug.Log("Max power");
         }
     }
 

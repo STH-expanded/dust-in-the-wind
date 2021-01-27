@@ -10,7 +10,7 @@ public class blowHitbox : MonoBehaviour
     private bool blowDirection;
 
     private float blowPower = 0;
-    private float blowPowerMax = 20;
+    private float blowPowerMax = 40;
     private float blowCount = 0;
     [SerializeField] private float pushActionCost = 0.001f; // Can't go over 1
     [SerializeField] private float pullActionCost = 0.001f; // Can't go over 1
@@ -65,14 +65,14 @@ public class blowHitbox : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider collider) {
-        if (collider.CompareTag("Cube-To-Push"))
+        if (collider.CompareTag("pushable") || collider.CompareTag("Player1") || collider.CompareTag("Player2"))
         {
             collisionsList.Add(collider);
         }
     }
 
     void OnTriggerExit(Collider collider) {
-        if (collider.CompareTag("Cube-To-Push"))
+        if (collider.CompareTag("pushable") || collider.CompareTag("Player1") || collider.CompareTag("Player2"))
         {
             collisionsList.Remove(collider);
         }
