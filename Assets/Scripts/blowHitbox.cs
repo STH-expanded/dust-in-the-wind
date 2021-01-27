@@ -12,8 +12,8 @@ public class blowHitbox : MonoBehaviour
     private float blowPower = 0;
     private float blowPowerMax = 20;
     private float blowCount = 0;
-    [SerializeField] private float pushActionCost = 0.05f; // Can't go over 1
-    [SerializeField] private float pullActionCost = 0.05f; // Can't go over 1
+    [SerializeField] private float pushActionCost = 0.001f; // Can't go over 1
+    [SerializeField] private float pullActionCost = 0.001f; // Can't go over 1
 
     [SerializeField] private KeyCode blowKey;
     [SerializeField] private KeyCode attractKey;
