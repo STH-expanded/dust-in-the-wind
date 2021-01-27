@@ -1,10 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class NavigationBetweenScene : MonoBehaviour
 {
+    [SerializeField]
+    private string sceneToLoad;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,6 @@ public class MainMenu : MonoBehaviour
 
     void OnMouseUp()
     {
-        SceneManager.LoadScene("Main Game", LoadSceneMode.Single);
+        SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Single);
     }
 }
