@@ -135,8 +135,8 @@ GameObject:
   - component: {fileID: 199148268}
   - component: {fileID: 199148267}
   - component: {fileID: 199148266}
-  - component: {fileID: 199148265}
   - component: {fileID: 199148264}
+  - component: {fileID: 199148265}
   - component: {fileID: 199148263}
   m_Layer: 0
   m_Name: ReplayText
@@ -154,7 +154,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 199148262}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c42c9702f40f9843b6438444cdca1c3, type: 3}
+  m_Script: {fileID: 11500000, guid: bc90882c1fa8047bdb7743d401a8c8f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: MainGame
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 199148262}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea6cb3918edf2d4408e7b455a5f56515, type: 3}
+  m_Script: {fileID: 11500000, guid: 4009d28b16e7b47d38737fa011a925d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!102 &199148266
@@ -285,9 +285,9 @@ GameObject:
   - component: {fileID: 414550824}
   - component: {fileID: 414550823}
   - component: {fileID: 414550822}
-  - component: {fileID: 414550821}
   - component: {fileID: 414550820}
-  - component: {fileID: 414550819}
+  - component: {fileID: 414550827}
+  - component: {fileID: 414550826}
   m_Layer: 0
   m_Name: ExitToMenuText
   m_TagString: Text
@@ -295,19 +295,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &414550819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 414550818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c42c9702f40f9843b6438444cdca1c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneToLoad: Menu
 --- !u!65 &414550820
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -321,18 +308,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.100003, y: 1.3406254, z: 0.00000031962995}
   m_Center: {x: 3.0500014, y: -0.6703127, z: -0.00000015981497}
---- !u!114 &414550821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 414550818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea6cb3918edf2d4408e7b455a5f56515, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!102 &414550822
 TextMesh:
   serializedVersion: 3
@@ -423,6 +398,31 @@ RectTransform:
   m_AnchoredPosition: {x: 4, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &414550826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414550818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4009d28b16e7b47d38737fa011a925d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &414550827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414550818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc90882c1fa8047bdb7743d401a8c8f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneToLoad: Menu
 --- !u!1 &695681963
 GameObject:
   m_ObjectHideFlags: 0
