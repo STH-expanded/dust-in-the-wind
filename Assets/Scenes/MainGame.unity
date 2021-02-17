@@ -520,7 +520,7 @@ BoxCollider:
   m_GameObject: {fileID: 80766440}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 6.100003, y: 1.3406254, z: 0.00000031962995}
   m_Center: {x: 3.0500014, y: -0.6703127, z: -0.00000015981497}
@@ -621,6 +621,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2753813602083532611, guid: 116d321582e8ef2479a5f09d92794259, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 23209f3392a449d488ac5f0f5ecff33c, type: 2}
     - target: {fileID: 5131915896172969932, guid: 116d321582e8ef2479a5f09d92794259, type: 3}
       propertyPath: m_Name
       value: Terrain
@@ -2088,6 +2092,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3081271071438462500, guid: 0b548a8415e171c438cf841f6714b235, type: 3}
+      propertyPath: m_Constraints
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 3081271071438462501, guid: 0b548a8415e171c438cf841f6714b235, type: 3}
       propertyPath: playerSpeed
       value: 3
@@ -2152,6 +2160,10 @@ PrefabInstance:
     - target: {fileID: 5023413342559271449, guid: 677d76f0900c7694988eb13e09148925, type: 3}
       propertyPath: m_Name
       value: Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5023413342559271451, guid: 677d76f0900c7694988eb13e09148925, type: 3}
+      propertyPath: m_Constraints
+      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 5023413342559271456, guid: 677d76f0900c7694988eb13e09148925, type: 3}
       propertyPath: m_RootOrder
