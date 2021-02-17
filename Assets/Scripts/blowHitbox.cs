@@ -70,17 +70,11 @@ public class blowHitbox : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider collider) {
-        if (collider.CompareTag("pushable") || collider.CompareTag("Player1") || collider.CompareTag("Player2"))
-        {
-            collisionsList.Add(collider);
-        }
+        collisionsList.Add(collider);
     }
 
     void OnTriggerExit(Collider collider) {
-        if (collider.CompareTag("pushable") || collider.CompareTag("Player1") || collider.CompareTag("Player2"))
-        {
-            collisionsList.Remove(collider);
-        }
+        collisionsList.Remove(collider);
     }
 
     void blowAction(Collider collider) {
