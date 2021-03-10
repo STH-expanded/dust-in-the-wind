@@ -13,7 +13,7 @@ public class blowHitbox : MonoBehaviour
     private float blowPowerMax = 40;
     private float blowCount = 0;
 
-    [SerializeField] private int blowMultiplier = 1;
+    [SerializeField] private int blowMultiplier = 5;
     [SerializeField] private float pushActionCost = 0.001f; // Can't go over 1
     [SerializeField] private float pullActionCost = 0.001f; // Can't go over 1
 
@@ -39,7 +39,7 @@ public class blowHitbox : MonoBehaviour
         
             if (blowCount <= blowPowerMax * 4)
             {
-                blowPower += (0.35f * blowMultiplier);
+                blowPower += (0.40f * blowMultiplier);
             }
 
             if (blowCount > 300 && blowPower > 0)
@@ -49,7 +49,7 @@ public class blowHitbox : MonoBehaviour
 
             if (Input.GetKey(blowKey))
             {
-                blowDirection = true;  
+                blowDirection = true;
             } else if (Input.GetKey(attractKey))
             {
                 blowDirection = false;
@@ -84,9 +84,16 @@ public class blowHitbox : MonoBehaviour
     }
 
     void blowAction(Collider collider) {
-        Vector3 playerVector = ((collider.transform.position - player.transform.position) * blowPower) + new Vector3(0, 1, 0) * (blowDirection ? 1 : -1);
+        Vector3 playerVector = new Vector3(0, 0, 0);
+        if (blowDirection) {
+            playerVector = Vector3.Scale(((collider.transform.position - player.transform.position) * blowPower) * (blowDirection ? 1 : -1), new Vector3(1, 0, 1)) + new Vector3(0, 10, 0);
+        } else if (!blowDirection) {
+            playerVector = ((collider.transform.position - player.transform.position) * blowPower) * (blowDirection ? 1 : -1);
+        }
+        
+        Debug.Log(playerVector);
         Rigidbody pushedBody = collider.GetComponent<Rigidbody>();
-        pushedBody.AddForce(playerVector);
+        pushedBody.AddForce(playerVector, ForceMode.Force);
     }
 
     private void LoadAction(Collider collider)
