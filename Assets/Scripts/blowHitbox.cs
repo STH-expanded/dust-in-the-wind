@@ -23,10 +23,10 @@ public class blowHitbox : MonoBehaviour
     [SerializeField] private Rigidbody player;
 
     private List <Collider> collisionsList = new List<Collider>();
+
     // Start is called before the first frame update
     void Start()
     {
-        //hitbox = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -39,7 +39,7 @@ public class blowHitbox : MonoBehaviour
         
             if (blowCount <= blowPowerMax * 4)
             {
-                blowPower += (0.25f * blowMultiplier);
+                blowPower += (0.35f * blowMultiplier);
             }
 
             if (blowCount > 300 && blowPower > 0)
@@ -78,7 +78,7 @@ public class blowHitbox : MonoBehaviour
     }
 
     void blowAction(Collider collider) {
-        Vector3 playerVector = ((collider.transform.position - player.transform.position) * blowPower * (blowDirection ? 1 : -1));
+        Vector3 playerVector = ((collider.transform.position - player.transform.position) * blowPower) + new Vector3(0, 1, 0) * (blowDirection ? 1 : -1);
         Rigidbody pushedBody = collider.GetComponent<Rigidbody>();
         pushedBody.AddForce(playerVector);
     }

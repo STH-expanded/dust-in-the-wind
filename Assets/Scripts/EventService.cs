@@ -15,8 +15,7 @@ public class EventService : MonoBehaviour
     public Sprite Perfect; // For what ?
     public Sprite Player1Win;
     public Sprite Player2Win;
-    
-    
+
     // Start is called before the first frame update
     private void Start()
     {
