@@ -49,9 +49,24 @@ public class blowHitbox : MonoBehaviour
 
             if (Input.GetKey(blowKey))
             {
+                if (player.name == "Player1")
+                {
+                    LoadingSystem.loadAmountPlayer1 -= pushActionCost * LoadingSystem.maximumLoadAmount;
+                } else if (player.name == "Player2")
+                {
+                    LoadingSystem.loadAmountPlayer2 -= pushActionCost * LoadingSystem.maximumLoadAmount;
+                }
+                
                 blowDirection = true;  
             } else if (Input.GetKey(attractKey))
             {
+                if (player.name == "Player1")
+                {
+                    LoadingSystem.loadAmountPlayer1 -= pullActionCost * LoadingSystem.maximumLoadAmount;
+                } else if (player.name == "Player2")
+                {
+                    LoadingSystem.loadAmountPlayer2 -= pullActionCost * LoadingSystem.maximumLoadAmount;
+                }
                 blowDirection = false;
             }
 
@@ -70,11 +85,19 @@ public class blowHitbox : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider collider) {
-        collisionsList.Add(collider);
+        if (!collider.CompareTag("Terrain") && !collider.CompareTag("BlowHitBox"))
+        {
+            collisionsList.Add(collider);
+        }
+
     }
 
     void OnTriggerExit(Collider collider) {
-        collisionsList.Remove(collider);
+        if (!collider.CompareTag("Terrain") && !collider.CompareTag("BlowHitBox"))
+        {
+            collisionsList.Remove(collider);
+        }
+
     }
 
     void blowAction(Collider collider) {
@@ -90,24 +113,20 @@ public class blowHitbox : MonoBehaviour
             case "Player1":
                 if (blowDirection && LoadingSystem.loadAmountPlayer1 >= pushActionCost)
                 {
-                    LoadingSystem.loadAmountPlayer1 -= pushActionCost * LoadingSystem.maximumLoadAmount;
                     blowAction(collider);
                 }
                 else if (!blowDirection && LoadingSystem.loadAmountPlayer1 >= pullActionCost)
                 {
-                    LoadingSystem.loadAmountPlayer1 -= pullActionCost * LoadingSystem.maximumLoadAmount;
                     blowAction(collider);
                 }
                 break;
             case "Player2":
                 if (blowDirection && LoadingSystem.loadAmountPlayer2 >= pushActionCost)
                 {
-                    LoadingSystem.loadAmountPlayer2 -= pushActionCost * LoadingSystem.maximumLoadAmount;
                     blowAction(collider);
                 }
                 else if (!blowDirection && LoadingSystem.loadAmountPlayer2 >= pullActionCost)
                 {
-                    LoadingSystem.loadAmountPlayer2 -= pullActionCost * LoadingSystem.maximumLoadAmount;
                     blowAction(collider);
                 }
                 break;

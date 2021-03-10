@@ -493,6 +493,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Terrain
       objectReference: {fileID: 0}
+    - target: {fileID: 5131915896172969932, guid: 116d321582e8ef2479a5f09d92794259, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
+      objectReference: {fileID: 0}
     - target: {fileID: 5509005145077294454, guid: 116d321582e8ef2479a5f09d92794259, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2054,6 +2058,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3081271071151606359, guid: 0b548a8415e171c438cf841f6714b235, type: 3}
+      propertyPath: m_TagString
+      value: BlowHitBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 3081271071151609260, guid: 0b548a8415e171c438cf841f6714b235, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3081271071438462500, guid: 0b548a8415e171c438cf841f6714b235, type: 3}
       propertyPath: m_Constraints
       value: 80
@@ -2119,6 +2131,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5023413341982814413, guid: 677d76f0900c7694988eb13e09148925, type: 3}
+      propertyPath: m_TagString
+      value: BlowHitBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 5023413341982814415, guid: 677d76f0900c7694988eb13e09148925, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5023413342559271449, guid: 677d76f0900c7694988eb13e09148925, type: 3}
       propertyPath: m_Name
       value: Player2
