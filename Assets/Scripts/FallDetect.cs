@@ -17,7 +17,7 @@ public class FallDetect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player1.transform.position.y <= -5 || player2.transform.position.y <= -5)
+        if (player1.transform.position.y <= -20 || player2.transform.position.y <= -20)
         {
             Debug.Log("Game ended");
             SceneManager.LoadScene("EndGame", LoadSceneMode.Single);
