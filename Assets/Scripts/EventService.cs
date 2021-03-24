@@ -23,10 +23,12 @@ public class EventService : MonoBehaviour
 
     private int player1Life = 2;
     private int player2Life = 2;
-    
+    private Image _image;
+
     // Start is called before the first frame update
     private void Start()
     {
+        _image = gameObject.GetComponent<Image>();
         // Starts the timer automatically
         StartCoroutine(Fade(4));
         timerIsRunning = true;
@@ -49,19 +51,19 @@ public class EventService : MonoBehaviour
             {
                 if (timeRemaining < 4 && timeRemaining > 3) 
                 {
-                    gameObject.GetComponent<Image>().sprite = Three;
+                    _image.sprite = Three;
                 } else if (timeRemaining < 3 && timeRemaining > 2)
                 {
-                    gameObject.GetComponent<Image>().sprite = Two;
+                    _image.sprite = Two;
                 }
                 else if (timeRemaining < 2 && timeRemaining > 1)
                 {
-                    gameObject.GetComponent<Image>().sprite = One;
+                    _image.sprite = One;
                 }
                 else if (timeRemaining < 1 && timeRemaining > 0)
                 {
                     timerIsRunning = false;
-                    gameObject.GetComponent<Image>().sprite = StartGame;
+                    _image.sprite = StartGame;
                 }
                 timeRemaining -= Time.deltaTime;
             }
@@ -77,8 +79,8 @@ public class EventService : MonoBehaviour
         {
             if (player1Life > 0)
             {
-                GetComponent<Image>().enabled = true;
-                gameObject.GetComponent<Image>().sprite = Out;
+                _image.enabled = true;
+                _image.sprite = Out;
                 StartCoroutine(Fade(1));
                 
                 player1.transform.position = (Vector3) startPositionPlayer1;
@@ -96,8 +98,8 @@ public class EventService : MonoBehaviour
         {
             if (player2Life > 0)
             {
-                GetComponent<Image>().enabled = true;
-                gameObject.GetComponent<Image>().sprite = Out;
+                _image.enabled = true;
+                _image.sprite = Out;
                 StartCoroutine(Fade(1));
                 
                 player2.transform.position = (Vector3) startPositionPlayer2;
@@ -106,19 +108,18 @@ public class EventService : MonoBehaviour
             } 
             else 
             {
-                gameObject.GetComponent<Image>().sprite = Player1Win;
-                GetComponent<Image>().enabled = true;
+                _image.sprite = Player1Win;
+                _image.enabled = true;
             }
         }
         
         endGame();
-        
     }
     
     IEnumerator Fade(int waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        GetComponent<Image>().enabled = false;
+        _image.enabled = false;
     }
 
     void endGame()
