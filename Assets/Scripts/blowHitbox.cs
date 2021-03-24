@@ -52,27 +52,23 @@ public class blowHitbox : MonoBehaviour
                 blowDirection = true;
             } else if (Input.GetKey(attractKey))
             {
-                if (player.name == "Player1")
-                {
-                    LoadingSystem.loadAmountPlayer1 -= pullActionCost * LoadingSystem.maximumLoadAmount;
-                } else if (player.name == "Player2")
-                {
-                    LoadingSystem.loadAmountPlayer2 -= pullActionCost * LoadingSystem.maximumLoadAmount;
-                }
                 blowDirection = false;
             }
 
-            if (player.name == "Player1")
+            if (player.name == "Player1" && LoadingSystem.loadAmountPlayer1 > 0)
             {
                 LoadingSystem.loadAmountPlayer1 -= pullActionCost * LoadingSystem.maximumLoadAmount;
-            } else if (player.name == "Player2")
+                collisionsList.ForEach(delegate(Collider collider) {
+                    LoadAction(collider);
+                });
+            } else if (player.name == "Player2" && LoadingSystem.loadAmountPlayer2 > 0)
             {
                 LoadingSystem.loadAmountPlayer2 -= pullActionCost * LoadingSystem.maximumLoadAmount;
+                collisionsList.ForEach(delegate(Collider collider) {
+                    LoadAction(collider);
+                });
             }
-
-            collisionsList.ForEach(delegate(Collider collider) {
-                LoadAction(collider);
-            });
+            
         } else {
             isActive = false;
             blowCount = 0;
@@ -108,7 +104,6 @@ public class blowHitbox : MonoBehaviour
             playerVector = ((collider.transform.position - player.transform.position) * blowPower) * (blowDirection ? 1 : -1);
         }
         
-        Debug.Log(playerVector);
         Rigidbody pushedBody = collider.GetComponent<Rigidbody>();
         pushedBody.AddForce(playerVector, ForceMode.Force);
     }

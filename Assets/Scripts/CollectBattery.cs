@@ -16,11 +16,12 @@ public class CollectBattery : MonoBehaviour
     {
         if (other.GetComponent<Player>() && gameObject.GetComponent<Renderer>().enabled) {
             player = other.gameObject;
-            if (
-                (LoadingSystem.loadAmountPlayer1 + batteryPower <= LoadingSystem.maximumLoadAmount || LoadingSystem.loadAmountPlayer1 < LoadingSystem.maximumLoadAmount) ||
-                (LoadingSystem.loadAmountPlayer2 + batteryPower <= LoadingSystem.maximumLoadAmount || LoadingSystem.loadAmountPlayer2 < LoadingSystem.maximumLoadAmount)
-            )
-            {
+            if (LoadingSystem.loadAmountPlayer1 + batteryPower <= LoadingSystem.maximumLoadAmount && LoadingSystem.loadAmountPlayer1 < LoadingSystem.maximumLoadAmount && player.tag == "Player1") {
+                collectSound.Play();
+                LoadAmount(INCREASE, player, batteryPower);
+                StartCoroutine(spawnCooldown(3));
+            }
+            else if (LoadingSystem.loadAmountPlayer2 + batteryPower <= LoadingSystem.maximumLoadAmount && LoadingSystem.loadAmountPlayer2 < LoadingSystem.maximumLoadAmount && player.tag == "Player2") {
                 collectSound.Play();
                 LoadAmount(INCREASE, player, batteryPower);
                 StartCoroutine(spawnCooldown(3));
@@ -46,10 +47,10 @@ public class CollectBattery : MonoBehaviour
         switch (player.name)
         {
             case "Player1":
-                LoadingSystem.loadAmountPlayer1 += increment;
+                if (LoadingSystem.loadAmountPlayer1 < LoadingSystem.maximumLoadAmount) LoadingSystem.loadAmountPlayer1 += increment;
                 break;
             case "Player2":
-                LoadingSystem.loadAmountPlayer2 += increment;
+                if (LoadingSystem.loadAmountPlayer2 < LoadingSystem.maximumLoadAmount) LoadingSystem.loadAmountPlayer2 += increment;
                 break;
         }
     }
@@ -59,20 +60,18 @@ public class CollectBattery : MonoBehaviour
         switch (player.name)
         {
             case "Player1":
-                LoadingSystem.loadAmountPlayer1 -= increment;
+                if (LoadingSystem.loadAmountPlayer1 > 0) LoadingSystem.loadAmountPlayer1 -= increment;
                 break;
             case "Player2":
-                LoadingSystem.loadAmountPlayer2 -= increment;
+                if (LoadingSystem.loadAmountPlayer2 > 0)LoadingSystem.loadAmountPlayer2 -= increment;
                 break;
         }
     }
 
     IEnumerator spawnCooldown(int waitTime )
     {
-        Debug.Log("Enter coroutine");
         gameObject.GetComponent<Renderer>().enabled = false;
         yield return new WaitForSeconds(waitTime);
-        Debug.Log("set to true");    
         gameObject.GetComponent<Renderer>().enabled = true;
     }
 }
