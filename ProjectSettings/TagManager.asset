@@ -11,6 +11,8 @@ TagManager:
   - Player1
   - Player2
   - pushable
+  - Terrain
+  - BlowHitBox
   layers:
   - Default
   - TransparentFX
