@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System;
 
 public class PlayerColor : MonoBehaviour
 {
@@ -13,8 +12,6 @@ public class PlayerColor : MonoBehaviour
     {
         playerColor = player.transform.Find("Blow_Chara_Mesh").transform.Find("Blow_Chara_Mesh_Body").GetComponent<Renderer>().material.GetColor("Color_DFC0C2F9");
         playerColorHUD.GetComponent<Image>().color = getColorFromRGBA(playerColor.ToString());
-
-
     }
 
     private Color getColorFromRGBA(string rgba)
@@ -31,8 +28,6 @@ public class PlayerColor : MonoBehaviour
         float.TryParse(nums[1], out _green);
         float.TryParse(nums[2], out _blue);
         float.TryParse(nums[3], out _a);
-
-        Debug.Log(_red + "," + _green + "," + _blue + "," + _a);
 
         Color sourceColor = new Color(_red, _green, _blue, 255);
         Color32 convertedColor;
