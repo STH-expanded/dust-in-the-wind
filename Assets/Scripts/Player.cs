@@ -25,12 +25,19 @@ public class Player : MonoBehaviour
 
     private bool hasGameStarted = false;
     
+    [SerializeField]
+    public Vector3 startPosition;
+    
     // Start is called before the first frame update
     void Start()
     {
         // Get the Rigidbody component of Player
         playerBody = GetComponent<Rigidbody>();
+        
+        // Save the spawning position of Player
+        startPosition = transform.position;
     }
+
 
     //Refresh at each frame
     void Update()
