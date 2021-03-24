@@ -22,12 +22,11 @@ public class PlayerColor : MonoBehaviour
 
         string[] nums = s.Split(","[0]);
 
-        float _red, _green, _blue, _a;
+        float _red, _green, _blue;
 
         float.TryParse(nums[0], out _red);
         float.TryParse(nums[1], out _green);
         float.TryParse(nums[2], out _blue);
-        float.TryParse(nums[3], out _a);
 
         Color sourceColor = new Color(_red, _green, _blue, 255);
         Color32 convertedColor;
