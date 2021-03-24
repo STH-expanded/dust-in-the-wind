@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class EventService : MonoBehaviour
 {
@@ -10,12 +11,19 @@ public class EventService : MonoBehaviour
     public Sprite Two;
     public Sprite One;
     public Sprite StartGame;
-    public Sprite ZeroToDeath;
     public Sprite Out;
-    public Sprite Perfect; // For what ?
     public Sprite Player1Win;
     public Sprite Player2Win;
 
+    private object startPositionPlayer1;
+    private object startPositionPlayer2;
+
+    [SerializeField] private Player player1;
+    [SerializeField] private Player player2;
+
+    private int player1Life = 2;
+    private int player2Life = 2;
+    
     // Start is called before the first frame update
     private void Start()
     {
@@ -59,27 +67,71 @@ public class EventService : MonoBehaviour
             }
         }
     }
-
-    // TODO: Change this method later to fit the 3 stock of the players (with the sprite Out)
+    
     void eventDuringTheMatch()
     {
-        GameObject player1 = GameObject.FindGameObjectWithTag("Player1");
-        GameObject player2 = GameObject.FindGameObjectWithTag("Player2");
+        startPositionPlayer1 = player1.startPosition;
+        startPositionPlayer2 = player2.startPosition;
+
         if (player1.transform.position.y <= -3)
         {
-            GetComponent<Image>().enabled = true;
-            gameObject.GetComponent<Image>().sprite = Player2Win;
+            if (player1Life > 0)
+            {
+                GetComponent<Image>().enabled = true;
+                gameObject.GetComponent<Image>().sprite = Out;
+                StartCoroutine(Fade(1));
+                
+                player1.transform.position = (Vector3) startPositionPlayer1;
+                
+                player1Life--;
+            } 
+            else 
+            {
+                gameObject.GetComponent<Image>().sprite = Player2Win;
+                GetComponent<Image>().enabled = true;
+            }
         }
+        
         else if (player2.transform.position.y <= -3)
         {
-            GetComponent<Image>().enabled = true;
-            gameObject.GetComponent<Image>().sprite = Player1Win;
+            if (player2Life > 0)
+            {
+                GetComponent<Image>().enabled = true;
+                gameObject.GetComponent<Image>().sprite = Out;
+                StartCoroutine(Fade(1));
+                
+                player2.transform.position = (Vector3) startPositionPlayer2;
+                
+                player2Life--;
+            } 
+            else 
+            {
+                gameObject.GetComponent<Image>().sprite = Player1Win;
+                GetComponent<Image>().enabled = true;
+            }
         }
+        
+        endGame();
+        
     }
     
     IEnumerator Fade(int waitTime)
     {
         yield return new WaitForSeconds(waitTime);
         GetComponent<Image>().enabled = false;
+    }
+
+    void endGame()
+    {
+        if (player1.transform.position.y <= -20 || player2.transform.position.y <= -20)
+        {
+            if (player1Life == 0 || player2Life == 0)
+            {
+                Debug.Log("Game ended");
+                SceneManager.LoadScene("EndGame", LoadSceneMode.Single);
+                LoadingSystem.loadAmountPlayer1 = 0;
+                LoadingSystem.loadAmountPlayer2 = 0;
+            }
+        }
     }
 }
