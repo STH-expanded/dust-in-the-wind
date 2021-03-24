@@ -11,9 +11,8 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private int playerSpeed = 1;
-    private int maxSpeed = 2;
+    private int maxSpeed = 6;
     
-    private Vector3 newMovement = Vector3.zero;
     private Vector3 accelerationVector = Vector3.one;
     private Vector3 inputVector;
 
@@ -61,12 +60,17 @@ public class Player : MonoBehaviour
 
     // Refresh at 60 fps
     void FixedUpdate() {
-        newMovement = playerBody.velocity;
         if (inputVector != Vector3.zero) {
-            if (Math.Abs(playerBody.velocity.x) >= maxSpeed) inputVector.x = 0;
-            if (Math.Abs(playerBody.velocity.z) >= maxSpeed) inputVector.z = 0;
-            playerBody.velocity += new Vector3(inputVector.x, 0, inputVector.z);
-        }        
+            // if (Math.Abs(playerBody.velocity.x) >= maxSpeed) inputVector.x = 0;
+            // if (Math.Abs(playerBody.velocity.z) >= maxSpeed) inputVector.z = 0;
+
+            if(playerBody.velocity.magnitude < maxSpeed)
+            {
+                playerBody.AddForce(new Vector3(inputVector.x, 0, inputVector.z), ForceMode.VelocityChange);
+            } 
+        }       
+
+        
     }
     
     IEnumerator SecondsBeforeStartingGame(int waitTime)
