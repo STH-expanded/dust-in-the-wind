@@ -52,6 +52,13 @@ public class blowHitbox : MonoBehaviour
                 blowDirection = true;
             } else if (Input.GetKey(attractKey))
             {
+                if (player.name == "Player1")
+                {
+                    LoadingSystem.loadAmountPlayer1 -= pullActionCost * LoadingSystem.maximumLoadAmount;
+                } else if (player.name == "Player2")
+                {
+                    LoadingSystem.loadAmountPlayer2 -= pullActionCost * LoadingSystem.maximumLoadAmount;
+                }
                 blowDirection = false;
             }
 
