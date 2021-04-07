@@ -17,8 +17,8 @@ public class blowHitbox : MonoBehaviour
     [SerializeField] private float pushActionCost = 0.001f; // Can't go over 1
     [SerializeField] private float pullActionCost = 0.001f; // Can't go over 1
 
-    [SerializeField] private KeyCode blowKey;
-    [SerializeField] private KeyCode attractKey;
+    [SerializeField] public KeyCode blowKey;
+    [SerializeField] public KeyCode attractKey;
 
     [SerializeField] private Rigidbody player;
 
