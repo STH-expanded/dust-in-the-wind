@@ -17,7 +17,9 @@ public class EventService : MonoBehaviour
 
     private object startPositionPlayer1;
     private object startPositionPlayer2;
-
+    
+    private AudioSource backgroundMusic;
+    
     [SerializeField] private Player player1;
     [SerializeField] private Player player2;
 
@@ -66,6 +68,10 @@ public class EventService : MonoBehaviour
                 {
                     timerIsRunning = false;
                     _image.sprite = StartGame;
+
+                    backgroundMusic = GetComponent<AudioSource>();
+                    backgroundMusic.Play();
+                    
                 }
                 timeRemaining -= Time.deltaTime;
             }
@@ -131,7 +137,7 @@ public class EventService : MonoBehaviour
             if (player1Life == 0 || player2Life == 0)
             {
                 Debug.Log("Game ended");
-                SceneManager.LoadScene("EndGame", LoadSceneMode.Additive);
+                SceneManager.LoadScene("Menu", LoadSceneMode.Additive);
                 LoadingSystem.loadAmountPlayer1 = 0;
                 LoadingSystem.loadAmountPlayer2 = 0;
             }

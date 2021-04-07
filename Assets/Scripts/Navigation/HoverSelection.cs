@@ -1,26 +1,25 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class HoverSelection : MonoBehaviour
 {
     Renderer renderer;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+    private float scale = 0.2f;
+    private AudioSource audio;
 
-    // Update is called once per frame
-    void Update()
+    private void OnMouseEnter()
     {
+        GetComponent<SpriteRenderer>().transform.localScale = (Vector2) GetComponent<SpriteRenderer>().transform.localScale + (new Vector2(scale, scale));
     }
     
-    private void OnMouseOver()
-    {
-        GetComponent<TextMesh>().color = Color.green;
-    }
-
     private void OnMouseExit()
     {
-        GetComponent<TextMesh>().color = Color.black;
+        GetComponent<SpriteRenderer>().transform.localScale = (Vector2) GetComponent<SpriteRenderer>().transform.localScale - (new Vector2(scale, scale));
+    }
+
+    private void OnMouseUp()
+    {
+        audio = GetComponent<AudioSource>();
+        audio.Play();
     }
 }
