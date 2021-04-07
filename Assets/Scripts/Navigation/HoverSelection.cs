@@ -3,7 +3,8 @@
 public class HoverSelection : MonoBehaviour
 {
     Renderer renderer;
-    
+    private float scale = 0.2f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,14 +14,14 @@ public class HoverSelection : MonoBehaviour
     void Update()
     {
     }
-    
-    private void OnMouseOver()
-    {
-        GetComponent<TextMesh>().color = Color.green;
-    }
 
+    private void OnMouseEnter()
+    {
+        GetComponent<SpriteRenderer>().transform.localScale = (Vector2) GetComponent<SpriteRenderer>().transform.localScale + (new Vector2(scale, scale));
+    }
+    
     private void OnMouseExit()
     {
-        GetComponent<TextMesh>().color = Color.black;
+        GetComponent<SpriteRenderer>().transform.localScale = (Vector2) GetComponent<SpriteRenderer>().transform.localScale - (new Vector2(scale, scale));
     }
 }
