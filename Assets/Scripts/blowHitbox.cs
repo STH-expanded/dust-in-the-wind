@@ -17,8 +17,8 @@ public class blowHitbox : MonoBehaviour
     [SerializeField] private float pushActionCost = 0.001f; // Can't go over 1
     [SerializeField] private float pullActionCost = 0.001f; // Can't go over 1
 
-    [SerializeField] private KeyCode blowKey;
-    [SerializeField] private KeyCode attractKey;
+    [SerializeField] public KeyCode blowKey;
+    [SerializeField] public KeyCode attractKey;
 
     [SerializeField] private Rigidbody player;
 
@@ -110,29 +110,32 @@ public class blowHitbox : MonoBehaviour
 
     private void LoadAction(Collider collider)
     {
-        switch (player.name)
-        {
-            case "Player1":
-                if (blowDirection && LoadingSystem.loadAmountPlayer1 >= pushActionCost)
-                {
-                    blowAction(collider);
-                }
-                else if (!blowDirection && LoadingSystem.loadAmountPlayer1 >= pullActionCost)
-                {
-                    blowAction(collider);
-                }
-                break;
-            case "Player2":
-                if (blowDirection && LoadingSystem.loadAmountPlayer2 >= pushActionCost)
-                {
-                    blowAction(collider);
-                }
-                else if (!blowDirection && LoadingSystem.loadAmountPlayer2 >= pullActionCost)
-                {
-                    blowAction(collider);
-                }
-                break;
+        if (collider.gameObject.tag == "Player1" || collider.gameObject.tag == "Player2") {
+            switch (player.name)
+            {
+                case "Player1":
+                    if (blowDirection && LoadingSystem.loadAmountPlayer1 >= pushActionCost)
+                    {
+                        blowAction(collider);
+                    }
+                    else if (!blowDirection && LoadingSystem.loadAmountPlayer1 >= pullActionCost)
+                    {
+                        blowAction(collider);
+                    }
+                    break;
+                case "Player2":
+                    if (blowDirection && LoadingSystem.loadAmountPlayer2 >= pushActionCost)
+                    {
+                        blowAction(collider);
+                    }
+                    else if (!blowDirection && LoadingSystem.loadAmountPlayer2 >= pullActionCost)
+                    {
+                        blowAction(collider);
+                    }
+                    break;
+            }
         }
+        
     }
 
 }
