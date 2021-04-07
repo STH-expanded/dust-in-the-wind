@@ -86,7 +86,8 @@ public class EventService : MonoBehaviour
                 StartCoroutine(Fade(1));
                 
                 player1.transform.position = (Vector3) startPositionPlayer1;
-                
+
+                LoadingSystem.loadAmountPlayer2 = 0.0f;
                 player1Life--;
             } 
             else 
@@ -105,9 +106,10 @@ public class EventService : MonoBehaviour
                 StartCoroutine(Fade(1));
                 
                 player2.transform.position = (Vector3) startPositionPlayer2;
-                
+
+                LoadingSystem.loadAmountPlayer1 = 0.0f;
                 player2Life--;
-            } 
+            }
             else 
             {
                 _image.sprite = Player1Win;

@@ -41,5 +41,4 @@ public class LoadingSystem : MonoBehaviour
         loadingSliderPlayer1.value = amount / maximumLoadAmount;
         loadingSliderPlayer2.value = amount / maximumLoadAmount;
     }
-
 }
