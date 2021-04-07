@@ -8,12 +8,6 @@ public class AnimStateCtrl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (gameObject.tag == "Player1")
-        {
-        } else if (gameObject.tag == "Player2") 
-        {
-        } else {
-        }
         animator = GetComponent<Animator>();
     }
 
