@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class NavigationBetweenScene : MonoBehaviour
@@ -6,20 +7,33 @@ public class NavigationBetweenScene : MonoBehaviour
     [SerializeField]
     private string sceneToLoad;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private float timeBeforeLoadingScene = 2;
+    private bool buttonClicked = false;
 
-    // Update is called once per frame
+    
     void Update()
     {
+        if (buttonClicked) {
+            StartCoroutine(WaitBeforeLoadingScene(2));
+            if (timeBeforeLoadingScene < 1)
+            {
+                SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Single);
+            }
+            else
+            {
+                timeBeforeLoadingScene -= Time.deltaTime;
+            }
+        }
         
     }
-
+    
     void OnMouseUp()
     {
-        SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Single);
+        buttonClicked = true;
+    }
+
+    IEnumerator WaitBeforeLoadingScene(int waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
     }
 }
